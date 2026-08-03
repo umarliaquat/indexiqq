@@ -20,6 +20,13 @@ const REGION_TICKERS: Record<string, string[]> = {
   'Asia-Pacific': [
     'SONY', 'TM', 'HMC', 'MUFG', 'TSM', 'BABA', 'JD', 'PDD', 'TAK', 'BHP', 'RIO', 'SE'
   ],
+  'Japan': [
+    '7203.T', '6758.T', '7974.T', '9984.T', '8035.T', '8306.T', '9983.T', '6861.T', '6501.T', '4502.T', '7267.T', '4063.T'
+  ],
+  'India': [
+    'RELIANCE.NS', 'TCS.NS', 'HDFCBANK.NS', 'INFY.NS', 'ICICIBANK.NS', 'SBIN.NS', 'BHARTIARTL.NS', 'ITC.NS',
+    'LT.NS', 'HINDUNILVR.NS', 'MARUTI.NS', 'SUNPHARMA.NS', 'TATAMOTORS.NS', 'KOTAKBANK.NS', 'WIPRO.NS'
+  ],
   'India & S. Asia': [
     'RELIANCE.NS', 'TCS.NS', 'HDFCBANK.NS', 'INFY.NS', 'ICICIBANK.NS', 'SBIN.NS', 'BHARTIARTL.NS', 'ITC.NS',
     'LT.NS', 'HINDUNILVR.NS', 'MARUTI.NS', 'SUNPHARMA.NS', 'TATAMOTORS.NS', 'KOTAKBANK.NS', 'WIPRO.NS'
@@ -33,6 +40,24 @@ const REGION_TICKERS: Record<string, string[]> = {
 };
 
 const MOCK_FALLBACKS: Record<string, any[]> = {
+  'US': [
+    { symbol: 'AAPL', name: 'Apple Inc.', price: 230.50, changePercent: 2.15, volume: 54000000, marketCap: 3.5e12, peRatio: 33.2 },
+    { symbol: 'NVDA', name: 'NVIDIA Corporation', price: 128.40, changePercent: 4.85, volume: 82000000, marketCap: 3.1e12, peRatio: 72.4 },
+    { symbol: 'MSFT', name: 'Microsoft Corp.', price: 445.20, changePercent: 1.60, volume: 22000000, marketCap: 3.3e12, peRatio: 36.1 },
+    { symbol: 'AMZN', name: 'Amazon.com Inc.', price: 195.10, changePercent: 3.20, volume: 38000000, marketCap: 2.0e12, peRatio: 51.0 },
+    { symbol: 'GOOGL', name: 'Alphabet Inc.', price: 184.80, changePercent: 2.40, volume: 27000000, marketCap: 2.3e12, peRatio: 26.8 },
+    { symbol: 'META', name: 'Meta Platforms Inc.', price: 510.60, changePercent: 3.90, volume: 18000000, marketCap: 1.3e12, peRatio: 28.5 },
+    { symbol: 'TSLA', name: 'Tesla Inc.', price: 242.30, changePercent: 5.40, volume: 92000000, marketCap: 7.6e11, peRatio: 65.0 },
+    { symbol: 'AMD', name: 'Advanced Micro Devices', price: 168.90, changePercent: 4.10, volume: 45000000, marketCap: 2.7e11, peRatio: 54.2 },
+    { symbol: 'CRM', name: 'Salesforce Inc.', price: 262.10, changePercent: 1.80, volume: 11000000, marketCap: 2.5e11, peRatio: 42.1 },
+    { symbol: 'ADBE', name: 'Adobe Inc.', price: 540.80, changePercent: 2.30, volume: 8500000, marketCap: 2.4e11, peRatio: 45.3 },
+    { symbol: 'NFLX', name: 'Netflix Inc.', price: 680.50, changePercent: 3.10, volume: 6500000, marketCap: 2.9e11, peRatio: 44.0 },
+    { symbol: 'JPM', name: 'JPMorgan Chase & Co.', price: 215.40, changePercent: 1.10, volume: 14000000, marketCap: 6.1e11, peRatio: 12.5 },
+    { symbol: 'V', name: 'Visa Inc.', price: 282.60, changePercent: 1.25, volume: 9200000, marketCap: 5.7e11, peRatio: 30.1 },
+    { symbol: 'COST', name: 'Costco Wholesale', price: 890.10, changePercent: 2.10, volume: 4200000, marketCap: 3.9e11, peRatio: 52.4 },
+    { symbol: 'MELI', name: 'MercadoLibre Inc.', price: 1980.50, changePercent: 4.60, volume: 2100000, marketCap: 1.0e11, peRatio: 74.0 },
+    { symbol: 'NU', name: 'Nu Holdings (Nubank)', price: 14.80, changePercent: 5.20, volume: 24000000, marketCap: 7.1e10, peRatio: 41.2 }
+  ],
   'US & Americas': [
     { symbol: 'AAPL', name: 'Apple Inc.', price: 230.50, changePercent: 2.15, volume: 54000000, marketCap: 3.5e12, peRatio: 33.2 },
     { symbol: 'NVDA', name: 'NVIDIA Corporation', price: 128.40, changePercent: 4.85, volume: 82000000, marketCap: 3.1e12, peRatio: 72.4 },
@@ -64,6 +89,20 @@ const MOCK_FALLBACKS: Record<string, any[]> = {
     { symbol: 'UBS', name: 'UBS Group AG', price: 31.40, changePercent: 2.30, volume: 5200000, marketCap: 1.1e11, peRatio: 15.1 },
     { symbol: 'VOD.L', name: 'Vodafone Group Plc', price: 74.50, changePercent: 0.95, volume: 42000000, marketCap: 2.5e10, peRatio: 14.2 }
   ],
+  'Japan': [
+    { symbol: '7203.T', name: 'Toyota Motor Corp.', price: 2980.0, changePercent: 2.40, volume: 18500000, marketCap: 4.1e13, peRatio: 10.4 },
+    { symbol: '6758.T', name: 'Sony Group Corp.', price: 13450.0, changePercent: 3.15, volume: 5400000, marketCap: 1.7e13, peRatio: 18.2 },
+    { symbol: '7974.T', name: 'Nintendo Co. Ltd.', price: 8540.0, changePercent: 1.85, volume: 4200000, marketCap: 1.1e13, peRatio: 21.0 },
+    { symbol: '9984.T', name: 'SoftBank Group Corp.', price: 9240.0, changePercent: 4.60, volume: 11200000, marketCap: 1.4e13, peRatio: 15.6 },
+    { symbol: '8035.T', name: 'Tokyo Electron Ltd.', price: 34500.0, changePercent: 5.20, volume: 3100000, marketCap: 1.6e13, peRatio: 29.8 },
+    { symbol: '8306.T', name: 'Mitsubishi UFJ Financial', price: 1640.0, changePercent: 1.95, volume: 42000000, marketCap: 2.1e13, peRatio: 11.2 },
+    { symbol: '9983.T', name: 'Fast Retailing Co. Ltd.', price: 43200.0, changePercent: 2.10, volume: 1800000, marketCap: 1.3e13, peRatio: 38.5 },
+    { symbol: '6861.T', name: 'Keyence Corp.', price: 71200.0, changePercent: 2.80, volume: 980000, marketCap: 1.7e13, peRatio: 42.0 },
+    { symbol: '6501.T', name: 'Hitachi Ltd.', price: 14100.0, changePercent: 3.40, volume: 4500000, marketCap: 1.3e13, peRatio: 24.1 },
+    { symbol: '4502.T', name: 'Takeda Pharmaceutical Co.', price: 4210.0, changePercent: 0.95, volume: 6200000, marketCap: 6.7e12, peRatio: 16.4 },
+    { symbol: '7267.T', name: 'Honda Motor Co.', price: 1780.0, changePercent: 1.65, volume: 12400000, marketCap: 8.9e12, peRatio: 8.9 },
+    { symbol: '4063.T', name: 'Shin-Etsu Chemical Co.', price: 6520.0, changePercent: 3.10, volume: 4100000, marketCap: 1.3e13, peRatio: 23.5 }
+  ],
   'Asia-Pacific': [
     { symbol: 'TSM', name: 'Taiwan Semiconductor', price: 178.50, changePercent: 4.60, volume: 31000000, marketCap: 9.2e11, peRatio: 30.5 },
     { symbol: 'SONY', name: 'Sony Group Corp.', price: 92.80, changePercent: 2.45, volume: 3800000, marketCap: 1.1e11, peRatio: 17.4 },
@@ -74,6 +113,17 @@ const MOCK_FALLBACKS: Record<string, any[]> = {
     { symbol: 'PDD', name: 'PDD Holdings Inc.', price: 142.60, changePercent: 5.20, volume: 9800000, marketCap: 1.9e11, peRatio: 21.0 },
     { symbol: 'BHP', name: 'BHP Group Limited', price: 58.40, changePercent: 1.50, volume: 6400000, marketCap: 1.4e11, peRatio: 12.8 },
     { symbol: 'SE', name: 'Sea Limited', price: 74.20, changePercent: 6.30, volume: 7200000, marketCap: 4.2e10, peRatio: 35.0 }
+  ],
+  'India': [
+    { symbol: 'RELIANCE.NS', name: 'Reliance Industries', price: 3080.50, changePercent: 2.10, volume: 7200000, marketCap: 2.1e12, peRatio: 28.5 },
+    { symbol: 'TCS.NS', name: 'Tata Consultancy Services', price: 4210.00, changePercent: 1.85, volume: 2900000, marketCap: 1.5e12, peRatio: 31.2 },
+    { symbol: 'HDFCBANK.NS', name: 'HDFC Bank Limited', price: 1680.40, changePercent: 2.30, volume: 14500000, marketCap: 1.3e12, peRatio: 19.4 },
+    { symbol: 'INFY.NS', name: 'Infosys Limited', price: 1840.20, changePercent: 2.60, volume: 6800000, marketCap: 7.6e11, peRatio: 26.1 },
+    { symbol: 'ICICIBANK.NS', name: 'ICICI Bank Limited', price: 1210.80, changePercent: 2.90, volume: 11200000, marketCap: 8.5e11, peRatio: 18.2 },
+    { symbol: 'SBIN.NS', name: 'State Bank of India', price: 860.50, changePercent: 3.40, volume: 16000000, marketCap: 7.7e11, peRatio: 11.5 },
+    { symbol: 'TATAMOTORS.NS', name: 'Tata Motors Limited', price: 1040.20, changePercent: 4.10, volume: 12800000, marketCap: 3.8e11, peRatio: 14.8 },
+    { symbol: 'LT.NS', name: 'Larsen & Toubro Ltd', price: 3620.00, changePercent: 2.20, volume: 3100000, marketCap: 4.9e11, peRatio: 34.0 },
+    { symbol: 'SUNPHARMA.NS', name: 'Sun Pharma Industries', price: 1540.60, changePercent: 1.70, volume: 2400000, marketCap: 3.7e11, peRatio: 36.2 }
   ],
   'India & S. Asia': [
     { symbol: 'RELIANCE.NS', name: 'Reliance Industries', price: 3080.50, changePercent: 2.10, volume: 7200000, marketCap: 2.1e12, peRatio: 28.5 },
@@ -145,7 +195,7 @@ export async function GET(request: Request) {
     })).filter((s: any) => s.price > 0);
 
     // Use rich fallbacks if Yahoo returns incomplete sets or if timeout occurred
-    const fallbackList = MOCK_FALLBACKS[region] || MOCK_FALLBACKS['US & Americas'];
+    const fallbackList = MOCK_FALLBACKS[region] || MOCK_FALLBACKS['US'] || MOCK_FALLBACKS['US & Americas'];
     if (stocks.length < 5) {
        stocks = fallbackList;
     } else {

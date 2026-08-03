@@ -134,7 +134,7 @@ export function Sidebar() {
                  style={{ display: "flex", alignItems: "center", gap: "0.85rem", padding: "0.75rem 0.9rem", borderRadius: "10px", border: "none", background: "transparent", color: "var(--color-text-secondary)", fontWeight: 500, fontSize: "0.9rem", width: "100%", cursor: "pointer", textAlign: "left" }}
                >
                  {theme === "light" ? <Moon size={19} /> : <Sun size={19} />} 
-                 {theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
+                 {theme === "light" ? "Dark Mode" : "Light Mode"}
                </button>
             </div>
           </div>
@@ -143,12 +143,12 @@ export function Sidebar() {
 
       {/* DESKTOP SIDEBAR (>= 1024px) */}
       <div className="desktop-sidebar-only" style={{
-        width: isCollapsed ? "80px" : "240px",
+        width: isCollapsed ? "75px" : "200px",
         height: "100vh",
         backgroundColor: "var(--color-bg)",
         borderRight: "1px solid var(--color-border)",
         flexDirection: "column",
-        padding: isCollapsed ? "1.5rem 0.6rem" : "1.5rem 1.1rem",
+        padding: isCollapsed ? "1.5rem 0.5rem" : "1.5rem 0.85rem",
         flexShrink: 0,
         overflowY: "auto",
         transition: "width 0.2s ease, padding 0.2s ease"
@@ -201,7 +201,7 @@ export function Sidebar() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: isCollapsed ? "center" : "space-between",
-                  padding: "0.65rem 0.8rem",
+                  padding: "0.65rem 0.7rem",
                   borderRadius: "10px",
                   textDecoration: "none",
                   color: isActive ? "var(--color-text-primary)" : "var(--color-text-secondary)",
@@ -250,19 +250,20 @@ export function Sidebar() {
         <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem", marginTop: "auto", paddingTop: "1.25rem", borderTop: "1px solid var(--color-border)" }}>
            <button 
              onClick={toggleTheme} 
-             title={isCollapsed ? (theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode") : undefined} 
+             title={isCollapsed ? (theme === "light" ? "Dark Mode" : "Light Mode") : undefined} 
              style={{ 
                display: "flex", 
                alignItems: "center", 
                justifyContent: isCollapsed ? "center" : "flex-start", 
-               gap: "0.85rem", 
-               padding: "0.65rem 0.8rem", 
+               gap: "0.7rem", 
+               padding: "0.65rem 0.7rem", 
                borderRadius: "10px", 
                border: "1px solid transparent", 
                background: "transparent", 
                color: "var(--color-text-secondary)", 
                fontWeight: 500, 
                fontSize: "0.875rem", 
+               whiteSpace: "nowrap",
                cursor: "pointer", 
                textAlign: "left",
                transition: "all 0.15s ease"
@@ -271,7 +272,7 @@ export function Sidebar() {
              onMouseOut={e => { e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.color = "var(--color-text-secondary)"; }}
            >
              {theme === "light" ? <Moon size={18} strokeWidth={1.8} /> : <Sun size={18} strokeWidth={1.8} />} 
-             {!isCollapsed && (theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode")}
+             {!isCollapsed && (theme === "light" ? "Dark Mode" : "Light Mode")}
            </button>
         </div>
       </div>
