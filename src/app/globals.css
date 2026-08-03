@@ -1,0 +1,422 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* VERCEL LIGHT THEME */
+  --color-bg: #fafafa;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f5f5f5;
+  --color-border: rgba(0, 0, 0, 0.1);
+  
+  --color-text-primary: #111111;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #888888;
+  
+  --color-accent: #111111; 
+  --color-accent-hover: #000000;
+  
+  --color-positive: #059669; /* Slightly darker green for light mode contrast */
+  --color-negative: #e11d48; /* Slightly darker red for light mode contrast */
+
+  --shadow-sm: 0 4px 14px 0 rgba(0,0,0,0.05);
+  --shadow-md: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+[data-theme="dark"] {
+  /* VERCEL DARK THEME */
+  --color-bg: #222222;
+  --color-surface: #0a0a0a; 
+  --color-surface-hover: #171717; 
+  --color-border: rgba(255, 255, 255, 0.14); 
+  
+  --color-text-primary: #ededed; 
+  --color-text-secondary: #a1a1aa;
+  --color-text-tertiary: #52525b;
+  
+  --color-accent: #ededed; 
+  --color-accent-hover: #ffffff;
+  
+  --color-positive: #10b981; 
+  --color-negative: #ff453a; 
+
+  --shadow-sm: 0 8px 30px rgba(0,0,0,0.5);
+  --shadow-md: 0 30px 60px rgba(0,0,0,0.6);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-inter-tight), sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px; 
+  transition: background-color 0.2s, color 0.2s;
+}
+
+input, button, select, textarea {
+  font-family: inherit;
+}
+
+/* Typography */
+h1 { font-size: 1.5rem; font-weight: 500; letter-spacing: -0.03em; }
+h2 { font-size: 1.25rem; font-weight: 500; letter-spacing: -0.02em; }
+h3 { font-size: 1rem; font-weight: 500; letter-spacing: -0.01em; }
+h4 { font-size: 0.875rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-secondary); }
+
+p { color: var(--color-text-secondary); }
+
+/* Components */
+.card {
+  background-color: transparent; 
+  border: 1px solid var(--color-border);
+  border-radius: 12px; 
+  padding: 1.25rem;
+}
+
+/* Vercel Pill Buttons */
+.button {
+  background-color: var(--color-text-primary);
+  color: var(--color-surface); /* Inverts on light/dark */
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button:hover {
+  background-color: var(--color-accent-hover);
+  transform: scale(1.02);
+}
+
+.button.secondary {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+.button.secondary:hover {
+  background-color: var(--color-surface-hover);
+  transform: none;
+}
+
+.badge {
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--color-border);
+  width: 100%;
+  margin: 1rem 0;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+
+/* Tab Hack */
+.vercel-tab {
+  position: relative;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-bottom: none;
+  padding: 0.5rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+  z-index: 2;
+}
+
+.vercel-tab::before {
+  content: '';
+  position: absolute;
+  bottom: -1px; 
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-surface);
+  z-index: 3;
+}
+
+/* Hide Next.js Development Badge Overlay ("N" logo) for cleaner screenshots */
+nextjs-portal {
+  display: none !important;
+}
+
+/* ==========================================
+   ENTERPRISE RESPONSIVE DESIGN ARCHITECTURE
+   ========================================== */
+
+/* 1. Shell & Container Responsiveness */
+.app-main-flex {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .app-main-flex {
+    flex-direction: column !important;
+  }
+}
+
+/* 2. Navigation Switching (Desktop vs Mobile) */
+.desktop-sidebar-only {
+  display: flex !important;
+}
+
+.mobile-header-only {
+  display: none !important;
+}
+
+@media (max-width: 1024px) {
+  .desktop-sidebar-only {
+    display: none !important;
+  }
+  .mobile-header-only {
+    display: flex !important;
+  }
+}
+
+/* 3. Multi-Column & Split View Stacking */
+.responsive-row-to-col {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 1024px) {
+  .responsive-row-to-col {
+    flex-direction: column !important;
+    height: auto !important;
+  }
+}
+
+/* 4. Overview & Market Sidebars */
+.responsive-sidebar-col {
+  width: 300px;
+  flex-shrink: 0;
+}
+
+.responsive-collapsed-col {
+  width: 48px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.responsive-vertical-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .responsive-sidebar-col {
+    width: 100% !important;
+    max-height: 240px !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--color-border) !important;
+  }
+  .responsive-collapsed-col {
+    width: 100% !important;
+    height: 48px !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    padding: 0 1.25rem !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--color-border) !important;
+  }
+  .responsive-vertical-text {
+    writing-mode: horizontal-tb !important;
+    transform: none !important;
+    margin-top: 0 !important;
+  }
+}
+
+/* 5. Terminal Sidebar Responsiveness */
+.responsive-terminal-sidebar {
+  width: 360px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .responsive-terminal-sidebar {
+    width: 100% !important;
+    max-height: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: 1px solid var(--color-border) !important;
+  }
+}
+
+/* 6. Page & Content Padding */
+.responsive-page-padding {
+  padding: 2.5rem;
+}
+
+.responsive-padding {
+  padding: 1.25rem 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .responsive-page-padding {
+    padding: 1rem !important;
+  }
+  .responsive-padding {
+    padding: 1rem !important;
+  }
+}
+
+/* 7. Flexible Table Scrolling */
+.responsive-table-wrapper {
+  width: 100%;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 8. Adaptive Card Grids */
+.responsive-grid-cards {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .responsive-grid-cards {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .responsive-hero-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem !important;
+  }
+}
+
+/* 9. Mobile Chart & Summary Prevention from Collapsing (Mobile Only, No Desktop Changes) */
+@media (max-width: 1024px) {
+  .responsive-chart-card {
+    flex: none !important;
+    width: 100% !important;
+    min-height: 380px !important;
+    height: 380px !important;
+  }
+  .responsive-chart-inner {
+    min-height: 310px !important;
+    height: 310px !important;
+  }
+  .responsive-summary-sidebar {
+    flex: none !important;
+    width: 100% !important;
+  }
+  .responsive-terminal-chart {
+    max-height: none !important;
+    min-height: 380px !important;
+    height: 380px !important;
+    padding: 0 0.75rem !important;
+  }
+  .responsive-terminal-header {
+    flex-wrap: wrap !important;
+    gap: 1rem !important;
+    padding: 1rem !important;
+  }
+  .responsive-terminal-header form {
+    width: 100% !important;
+  }
+}
+
+/* 10. Mobile Table Height Expansion (Fixing single row clipping on mobile) */
+@media (max-width: 1024px) {
+  .responsive-table-section {
+    flex: none !important;
+    min-height: auto !important;
+    height: auto !important;
+    width: 100% !important;
+    display: block !important;
+  }
+  .responsive-table-wrapper {
+    min-height: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    flex: none !important;
+    display: block !important;
+  }
+}
+
+/* 11. Clean Mobile Filter Layouts (Executive stack view on mobile, No Desktop Changes) */
+@media (max-width: 768px) {
+  .responsive-filter-toolbar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.85rem !important;
+    padding: 1rem !important;
+  }
+  .responsive-filter-group {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    gap: 0.75rem !important;
+  }
+  .responsive-filter-input {
+    width: 100% !important;
+  }
+  .responsive-filter-input input {
+    width: 100% !important;
+  }
+  .responsive-filter-item {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+  .responsive-filter-item > span {
+    flex-shrink: 0 !important;
+  }
+  .responsive-filter-item > div {
+    flex: 1 !important;
+    max-width: 65% !important;
+  }
+  .responsive-filter-item select {
+    width: 100% !important;
+  }
+}
