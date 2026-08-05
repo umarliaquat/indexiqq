@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createChart, IChartApi, ISeriesApi, ColorType, CrosshairMode, CandlestickSeries, LineSeries } from "lightweight-charts";
 import { CandleData, DataPoint } from "@/lib/indicators";
 
@@ -21,13 +21,27 @@ export function Chart({ data, smaData, emaData, aiPrediction, theme = "light" }:
   const emaSeriesRef = useRef<ISeriesApi<"Line"> | null>(null);
   const aiSeriesRef = useRef<ISeriesApi<"Line"> | null>(null);
 
+  const [currentTheme, setCurrentTheme] = useState<string>("light");
+
+  useEffect(() => {
+    const activeTheme = document.documentElement.getAttribute("data-theme") || theme || "light";
+    setCurrentTheme(activeTheme);
+
+    const observer = new MutationObserver(() => {
+      const updatedTheme = document.documentElement.getAttribute("data-theme") || "light";
+      setCurrentTheme(updatedTheme);
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => observer.disconnect();
+  }, [theme]);
+
   useEffect(() => {
     if (!chartContainerRef.current) return;
 
-    const isDark = theme === "dark";
-    const bg = isDark ? "#121212" : "#FFFFFF";
+    const isDark = currentTheme === "dark";
+    const bg = isDark ? "#0a0a0a" : "#FFFFFF";
     const text = isDark ? "#A1A1AA" : "#6B7280";
-    const grid = isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)";
+    const grid = isDark ? "rgba(255, 255, 255, 0.06)" : "rgba(0, 0, 0, 0.05)";
 
     const chart = createChart(chartContainerRef.current, {
       layout: {
@@ -93,7 +107,30 @@ export function Chart({ data, smaData, emaData, aiPrediction, theme = "light" }:
     return () => {
       chart.remove();
     };
-  }, [data, theme]); 
+  }, [data, currentTheme]);
+
+  // Handle live theme switches smoothly without re-rendering data series if chart exists
+  useEffect(() => {
+    if (chartRef.current) {
+      const isDark = currentTheme === "dark";
+      chartRef.current.applyOptions({
+        layout: {
+          background: { type: ColorType.Solid, color: isDark ? "#0a0a0a" : "#FFFFFF" },
+          textColor: isDark ? "#A1A1AA" : "#6B7280",
+        },
+        grid: {
+          vertLines: { color: isDark ? "rgba(255, 255, 255, 0.06)" : "rgba(0, 0, 0, 0.05)" },
+          horzLines: { color: isDark ? "rgba(255, 255, 255, 0.06)" : "rgba(0, 0, 0, 0.05)" },
+        },
+        rightPriceScale: {
+          borderColor: isDark ? "rgba(255, 255, 255, 0.06)" : "rgba(0, 0, 0, 0.05)",
+        },
+        timeScale: {
+          borderColor: isDark ? "rgba(255, 255, 255, 0.06)" : "rgba(0, 0, 0, 0.05)",
+        }
+      });
+    }
+  }, [currentTheme]); 
 
   // Fast updates for toggling overlays without completely destroying the chart
   useEffect(() => {

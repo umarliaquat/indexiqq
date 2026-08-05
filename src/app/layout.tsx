@@ -11,8 +11,13 @@ const interTight = Inter_Tight({
 });
 
 export const metadata: Metadata = {
-  title: "Stock Predictor Pro",
-  description: "Enterprise-grade Stock Market Indicator & Prediction",
+  title: "IndexIQ | Global Markets & Quantitative Screening",
+  description: "Enterprise-grade Quantitative Stock Market Intelligence, Multi-factor Screening & AI Trade Ideas",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 import { Sidebar } from "@/components/Sidebar";
